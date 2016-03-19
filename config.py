@@ -1,3 +1,5 @@
+import os
+
 class Config(object):
     DEBUG = False
     TESTING = False
@@ -5,7 +7,7 @@ class Config(object):
     SECRET_KEY = 'this-really-needs-to-be-changed'
     MONGODB_SETTINGS = {
     'db': 'teste1',
-    'host': 'mongodb://localhost/database_name'
+    'host': os.environ['MONGOLAB_URI']
 }
 
 
