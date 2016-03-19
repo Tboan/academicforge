@@ -3,6 +3,10 @@ class Config(object):
     TESTING = False
     CSRF_ENABLED = True
     SECRET_KEY = 'this-really-needs-to-be-changed'
+    MONGODB_SETTINGS = {
+    'db': 'teste1',
+    'host': 'mongodb://localhost/database_name'
+}
 
 
 class ProductionConfig(Config):

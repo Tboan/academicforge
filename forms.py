@@ -4,6 +4,6 @@ from wtforms import StringField, PasswordField
 from wtforms.validators import DataRequired
 
 class SingUp(Form):
-    name = StringField('name', validators=[DataRequired()])
-    email = EmailField('email', validators=[DataRequired()])
-    password = PasswordField('password', validators=[DataRequired()])
+    name = StringField('name')
+    email = StringField('email')
+    password = PasswordField('password')

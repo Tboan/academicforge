@@ -31,7 +31,12 @@ def singup():
 
         if password is None or len(password) == 0:
             return 'Deve adicionar uma senha'
+
         return 'Confirmar Email'
+    try:
+        print(form.email.data, form.password.data, form.name.data)
+    except Exception as e:
+        print(e)
     return render_template('home/singup.html', form=form)
 
 
