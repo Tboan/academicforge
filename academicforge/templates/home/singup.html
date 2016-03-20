@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css')}}">
+{% endblock css%}
+
+{% block title %} Cadastar usuario {% endblock title %}
+
+{% block body %}
+
+
+    <div class="container">
+        <form id="singup" role="form" class="form-signin"  method="post">
+            {{ form.hidden_tag()}}
+            <h2 class="form-signin-heading">Cadastra-se!</h2>
+            <div class="form-group">
+                {{ form.name(onblur='is_name_valid()', class_='form-control required', placeholder='Nome Completo')|safe}}
+                <p id="error-name"></p>
+            </div>
+
+            <div class="form-group">
+                {{ form.email(class_='form-control', placeholder='Email')}}
+                <p id="error-email"></p>
+            </div>
+
+            <div class="form-group">
+                {{ form.password(class_='form-control', placeholder='Senha')}}
+            </div>
+
+            <button type="submit" class="btn btn-default">Cadastrar</button>
+        </form>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/validators.js')}}"></script>
+
+    <script>
+        function is_email_valid_and_not_exist(){
+    var email = document.getElementById('email')
+    var error = document.getElementById('error-email')
+
+    // Campo de email não pode estar vazio
+    if(email.value.length == 0){
+        error.innerHTML = 'Campo Email não esta vazio'
+        return false
+    }
+
+    // Campo email não esta vazio, mas deve ser valido
+    //TODO - Regex para verificar se o email é valido, por enquanto estar pelo browser
+
+    // Email informado não deve estar cadastrado na base ainda
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+        document.getElementById("error-email").innerHTML = xhttp.responseText;
+        }
+    };
+    xhttp.open("GET", "{{ url_for('home.confirma_email') }}", true);
+    xhttp.send();
+}
+    </script>
+{% endblock body %}
