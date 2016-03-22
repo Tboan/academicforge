@@ -7,3 +7,7 @@ class SingUp(Form):
     name = StringField('name', validators=[DataRequired()])
     email = EmailField('email', validators=[DataRequired()])
     password = PasswordField('password', validators=[DataRequired()])
+
+class LoginForm(Form):
+    email = EmailField('email', validators=[DataRequired()])
+    password = PasswordField('password', validators=[DataRequired()])

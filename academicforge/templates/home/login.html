@@ -12,11 +12,7 @@
     <div class="container">
         <form id="singup" role="form" class="form-signin"  method="post">
             {{ form.hidden_tag()}}
-            <h2 class="form-signin-heading">Cadastra-se!</h2>
-            <div class="form-group">
-                {{ form.name(onblur='is_name_valid()', class_='form-control required', placeholder='Nome Completo')|safe}}
-                <p id="error-name"></p>
-            </div>
+            <h2 class="form-signin-heading">Login!</h2>
 
             <div class="form-group">
                 {{ form.email(class_='form-control', placeholder='Email', onblur='is_email_valid_and_not_exist()')}}
@@ -27,7 +23,7 @@
                 {{ form.password(class_='form-control', placeholder='Senha')}}
             </div>
 
-            <button type="submit" class="btn btn-default">Cadastrar</button>
+            <button type="submit" class="btn btn-default">Entrar</button>
         </form>
     </div>
 
