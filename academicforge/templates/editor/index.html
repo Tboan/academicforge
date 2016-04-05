@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %} Editor {% endblock title %}
+
+{% block css %}
+
+{% endblock css%}
+
+{% block body %}
+Bem vindo ao editor
+
+<div id="summernote">
+    Academic forge
+</div>
+
+{% endblock body%}
+
+{% block js_end %}
+
+    <!-- include summernote css/js-->
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.js"></script>
+    <script src="{{ url_for('static', filename='js/editor/main.js')}}"></script>
+{% endblock js_end %}

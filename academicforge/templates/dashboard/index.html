@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
 
-{% block title %} Academic Forge {% endblock title%}
+{% block title %} Dashboard {% endblock title %}
 
 {% block body %}
-
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
@@ -18,12 +17,13 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="{{ url_for('home.login')}}">Entrar</a></li>
-            <li><a href="{{ url_for('home.singup')}}">Cadastrar</a></li>
+            <li><a href="{{ url_for('home.logout')}}">Saur</a></li>
           </ul>
         </div>
       </div>
     </nav>
+    <div class="container" style="padding-top: 30px">
+        <h1>Dashboar</h1>
+    </div>
 
-
-{% endblock body %}
+{% endblock body%}

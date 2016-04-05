@@ -22,13 +22,20 @@ from .api import EmailApi
 api = Api(app)
 
 from .views.home import home_blueprint
+from .views.dashboard import dashboard_blueprint
+from .views.editor import editor_blueprint
+
 app.register_blueprint(home_blueprint)
+app.register_blueprint(dashboard_blueprint)
+app.register_blueprint(editor_blueprint)
 
 # Registrandos as APIs
 
 api.add_resource(EmailApi, '/api/email/v0.1/<email>', endpoint='email_api')
 
 from .models import UserModel
+
+lm.login_view = 'home.login'
 
 @lm.user_loader
 def load_user(user_id):

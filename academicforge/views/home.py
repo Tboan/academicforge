@@ -1,33 +1,28 @@
 import os
 
 import re
-from flask import Blueprint,render_template, url_for, redirect
+from flask import Blueprint, render_template, url_for, redirect, request
 from flask.ext.login import login_user, current_user, login_required, logout_user
 
 from ..forms import SingUp, LoginForm
 from ..models import UserModel
+
 # Criando instacia principal do Flask
 
 home_blueprint = Blueprint('home', __name__)
+
 
 # Rota para pagina inicial (home)
 @home_blueprint.route('/')
 def home():
     if current_user.is_authenticated:
-        return redirect(url_for('home.dashboard'))
+        return redirect(url_for('dashboard.dashboard'))
     user = UserModel.objects
     print(user)
     return render_template('home/home.html')
 
-
-@home_blueprint.route('/dashboard')
-@login_required
-def dashboard():
-    return 'dashboard !!!'
-
 @home_blueprint.route('/cadastro', methods=('GET', 'POST'))
 def singup():
-
     form = SingUp()
     if form.validate_on_submit():
         user = UserModel()
@@ -44,12 +39,13 @@ def singup():
             return 'Deve adicionar uma senha'
 
         user.save()
-        return 'Confirmar Email'
+        return redirect(url_for('dashboard.dashboard'))
     try:
         print(form.email.data, form.password.data, form.name.data)
     except Exception as e:
         print(e)
     return render_template('home/singup.html', form=form)
+
 
 @home_blueprint.route('/login', methods=('GET', 'POST'))
 def login():
@@ -63,17 +59,22 @@ def login():
             user = None
 
         if user is None:
-            render_template('home/login.html', form=form)
+            return render_template('home/login.html', form=form)
 
         if user.password == form.password.data:
             login_user(user)
             print('redirect')
-            return redirect(url_for('home.dashboard'))
+            # next = request.args.get('next')
+
+            # if not next_is_valid(next):
+            #     return abort(400)
+            return redirect(url_for('dashboard.dashboard'))
 
     return render_template('home/login.html', form=form)
+
 
 @home_blueprint.route('/logout')
 @login_required
 def logout():
-	logout_user()
-	return redirect(url_for('home.home'))
+    logout_user()
+    return redirect(url_for('home.home'))
